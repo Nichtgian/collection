@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { SimpleLoadingStrategy } from './utils/lazy-loading/simple-loading.strategy';
+import { ROUTES } from './data/types/constants/routes.constant';
 
-const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  }
-];
 @NgModule({
+  providers: [SimpleLoadingStrategy],
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { preloadingStrategy: SimpleLoadingStrategy })
   ],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {}
