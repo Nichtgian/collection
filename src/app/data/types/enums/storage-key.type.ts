@@ -1,3 +1,5 @@
 export enum StorageKey {
-    FirstLoad = "firstLoad"
+    FirstLoad = "firstLoad",
+    Watches = "watches",
+    Cases = "cases"
 }

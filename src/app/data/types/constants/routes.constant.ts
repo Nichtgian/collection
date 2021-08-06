@@ -7,5 +7,7 @@ export const ROUTES: Routes = [
     { path: 'explore', loadChildren: () => import('../../../pages/main/explore/explore.module').then(m => m.ExplorePageModule) },
     { path: 'settings', loadChildren: () => import('../../../pages/main/settings/settings.module').then(m => m.SettingsPageModule) },
     { path: 'welcome', loadChildren: () => import('../../../pages/other/welcome-slide/welcome-slide.module').then(m => m.WelcomeSlidePageModule) },
+    { path: 'watch-detail', loadChildren: () => import('../../../pages/other/watch-detail/watch-detail.module').then(m => m.WatchDetailPageModule) },
+    { path: 'case-detail', loadChildren: () => import('../../../pages/other/case-detail/case-detail.module').then(m => m.CaseDetailPageModule) },
     { path: '**', redirectTo: 'home' }
 ];

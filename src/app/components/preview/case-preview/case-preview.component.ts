@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Case } from 'src/app/data/models/case/case.model';
 
 @Component({
@@ -7,11 +9,25 @@ import { Case } from 'src/app/data/models/case/case.model';
   styleUrls: ['./case-preview.component.scss'],
 })
 export class CasePreviewComponent implements OnInit {
+  
+  @Input() case: Case;
 
-  case: Case = new Case("Large main storage case", "Pelicase", 2, 5)
-
-  constructor() { }
+  constructor(public navCtrl: NavController) { }
 
   ngOnInit() {}
+
+  toggleMarked() {
+    this.case.isMarked = !this.case.isMarked;
+  }
+
+  navigateDetail() {
+    const options: NavigationExtras = {
+        queryParams: {
+            id: this.case.id
+        }
+    };
+
+    this.navCtrl.navigateForward(['/case-detail'], options);
+  }
 
 }

@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{id}}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="save()" danger>
+        <ion-icon slot="icon-only" name="save-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="openActionSheet()">
+        <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-accordion title="General information" isExpanded="true">
+    <ion-item>
+      <ion-label position="stacked">Brand</ion-label>
+      <ion-input placeholder="{{placeholder.brand}}" [(ngModel)]="watch.brand" required="true" autocapitalize="words"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Subbrand</ion-label>
+      <ion-input placeholder="{{placeholder.subbrand}}" [(ngModel)]="watch.subbrand" autocapitalize="words"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Model</ion-label>
+      <ion-input placeholder="{{placeholder.model}}" [(ngModel)]="watch.model" required="true" autocapitalize="words"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Title / Name</ion-label>
+      <ion-input placeholder="{{placeholder.title}}" [(ngModel)]="watch.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Reference Number</ion-label>
+      <ion-input placeholder="{{placeholder.reference}}" [(ngModel)]="watch.reference"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Serial Number</ion-label>
+      <ion-input placeholder="101010" [(ngModel)]="watch.serial"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Numbered / Limited Edition</ion-label>
+      <ion-input placeholder="Nr. 017/999" [(ngModel)]="watch.numberedEdition"></ion-input>
+    </ion-item>
+  </app-accordion>
+
+  <app-accordion title="Status">
+    <ion-item>
+      <ion-label>Collection Status</ion-label>
+      <ion-select [(ngModel)]="watch.status" okText="Okay" cancelText="Cancel" placeholder="Select.." required="true">
+        <ion-select-option *ngFor="let option of selection.WatchStatus" value="{{option}}">{{option}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <app-multiselect [options]="selection.WatchSet" [selection]="watch.set" name="Set" allowMultiselect="false" disableCustom="false"></app-multiselect>
+    <app-multiselect [options]="selection.WatchCertification" [selection]="watch.caseMaterial" name="Certifications" allowMultiselect="true" disableCustom="false"></app-multiselect>
+  </app-accordion>
+
+  <app-accordion title="Specification Case">
+    <ion-item>
+      <ion-label position="stacked">Diameter (mm)</ion-label>
+      <ion-input type="number" placeholder="39" [(ngModel)]="watch.caseDiameter" min="0" max="65"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">LugToLug (mm)</ion-label>
+      <ion-input type="number" placeholder="46" [(ngModel)]="watch.caseLugToLug" min="0" max="65"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Thickness / Height (mm)</ion-label>
+      <ion-input type="number" placeholder="12.5" [(ngModel)]="watch.caseThickness" min="0" max="30"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Lug width (mm)</ion-label>
+      <ion-input type="number" placeholder="20" [(ngModel)]="watch.caseLugWidth" min="0" max="30"></ion-input>
+    </ion-item>
+    <app-multiselect [options]="selection.WatchMaterial" [selection]="watch.caseMaterial" name="Case" allowMultiselect="true" disableCustom="false"></app-multiselect>
+    <app-multiselect [options]="selection.WatchMaterial" [selection]="watch.bezelMaterial" name="Bezel" allowMultiselect="true" disableCustom="false"></app-multiselect>
+    <app-multiselect [options]="selection.WatchCrystal" [selection]="watch.crystal" name="Crystal" allowMultiselect="false" disableCustom="false"></app-multiselect>
+    <ion-item>
+      <ion-label position="stacked">Water Resistance (ATM)</ion-label>
+      <ion-input type="number" placeholder="10 (1 ATM ~ 10m)" [(ngModel)]="watch.caseDiameter" min="0" max="65"></ion-input>
+    </ion-item>
+  </app-accordion>
+
+  <app-accordion title="Specification Dial">
+    <app-multiselect [options]="selection.WatchDialColor" [selection]="watch.dialColor" name="Dial Color" allowMultiselect="true" disableCustom="false"></app-multiselect>
+    <app-multiselect [options]="selection.WatchDialMaterial" [selection]="watch.dialMaterial" name="Dial Material" allowMultiselect="true" disableCustom="false"></app-multiselect>
+    <app-multiselect [options]="selection.WatchDialType" [selection]="watch.dialType" name="Dial Type" allowMultiselect="true" disableCustom="false"></app-multiselect>
+    <app-multiselect [options]="selection.WatchDialNumeral" [selection]="watch.dialNumerals" name="Dial Numerals" allowMultiselect="false" disableCustom="false"></app-multiselect>
+  </app-accordion>
+
+  <app-accordion title="Specification Caliber">
+    <ion-item>
+      <ion-label position="stacked">Caliber</ion-label>
+      <ion-input placeholder="Tudor M120210" [(ngModel)]="watch.caliber"></ion-input>
+    </ion-item>    
+    <ion-item>
+      <ion-label position="stacked">Base Caliber</ion-label>
+      <ion-input placeholder="ETA" [(ngModel)]="watch.caliberBase"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Power Reserve (h)</ion-label>
+      <ion-input type="number" placeholder="48" [(ngModel)]="watch.caliberPowerReserve" min="0" max="150"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Number of Jewels</ion-label>
+      <ion-input type="number" placeholder="48" [(ngModel)]="watch.caliberJewels" min="0" max="100"></ion-input>
+    </ion-item>
+    <app-multiselect [options]="selection.WatchCaliberFrequency" [selection]="watch.caliberFrequency" name="Frequency (A/h or Hz)" allowMultiselect="true" disableCustom="false"></app-multiselect>
+    <ion-item>
+      <ion-label position="stacked">Caliber Description</ion-label>
+      <ion-textarea placeholder="Battery Types, Service intervals.." spellcheck="true" autoGrow="true"></ion-textarea>
+    </ion-item>  
+  </app-accordion>
+
+  <app-accordion title="Functions & Features">
+    <app-multiselect [options]="selection.WatchFunctions" [selection]="watch.functions" name="Functions (Movement)" allowMultiselect="true" disableCustom="false"></app-multiselect>
+    <app-multiselect [options]="selection.WatchFeatures" [selection]="watch.features" name="Features" allowMultiselect="true" disableCustom="false"></app-multiselect>
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea placeholder="Notes.." spellcheck="true" autoGrow="true"></ion-textarea>
+    </ion-item>
+  </app-accordion>
+  
+  <app-accordion title="Dates & Events"></app-accordion>
+
+  
+  <app-accordion title="Assets"></app-accordion>
+
+
+
+  <app-multiselect></app-multiselect>
+
+</ion-content>

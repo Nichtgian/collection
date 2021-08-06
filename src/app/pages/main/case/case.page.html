@@ -1,14 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Case</ion-title>
+    <ion-buttons slot="primary" [hidden]="searchActive">
+      <ion-button (click)="openActionSheet()">
+        <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row class="ion-justify-content-center">
+    <ion-row class="ion-justify-content-center" *ngFor="let case of cases">
       <ion-col size="12">
-        <app-case-preview></app-case-preview>
+        <app-case-preview [case]="case"></app-case-preview>
       </ion-col>
     </ion-row>
   </ion-grid>

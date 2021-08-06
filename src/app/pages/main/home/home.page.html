@@ -4,52 +4,49 @@
       <ion-button (click)="toggleSearch()">
         <ion-icon slot="icon-only" name="search-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="toggleSettings()">
-        <ion-icon slot="icon-only" name="build-outline"></ion-icon>
+      <ion-button (click)="openActionSheet()">
+        <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>
       <ion-label [hidden]="searchActive">Collection</ion-label>
-      <ion-searchbar [hidden]="!searchActive" showCancelButton="always" placeholder="Brand or model" cancel-button-icon="close-outline" (ionCancel)="toggleSearch()"></ion-searchbar>
+      <ion-searchbar [hidden]="!searchActive" showCancelButton="always" placeholder="Brand or model" cancel-button-icon="chevron-back-outline" (ionCancel)="toggleSearch()" (ionInput)="search($event.target.value)"></ion-searchbar>
     </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment (ionChange)="filterCategory($event.detail.value)" scrollable="true" value="all">
+      <ion-segment-button value="all">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="marked">
+        <ion-label>Marked/Favorites</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="inCollection">
+        <ion-label>Collection</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="wishlist">
+        <ion-label>Wishlist&Waitlist</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="archive">
+        <ion-label>Sold&Archive</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!--
-  <ion-segment (ionChange)="filterCategory($event.detail.value)" scrollable="true">
-    <ion-segment-button value="all">
-      <ion-label>All</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="marked">
-      <ion-label>Marked</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="inCollection">
-      <ion-label>Collection</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="wishlist">
-      <ion-label>Wishlist</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="archive">
-      <ion-label>Archive</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-  -->
-
   <ion-grid>
-
-    <ion-row class="ion-justify-content-center" *ngFor="let brand of watchesByBrand">
+    <ion-row class="ion-justify-content-center" *ngFor="let brand of watchesByBrand | keyvalue">
       <ion-col size="12">
         <ion-card>
           <ion-card-header class="ion-text-uppercase ion-text-center">
-            <ion-card-subtitle>{{brand.name}}</ion-card-subtitle>
+            <ion-card-subtitle>{{brand.key}}</ion-card-subtitle>
           </ion-card-header>
         </ion-card>
       </ion-col>
-      <ion-col size="6" *ngFor="let watch of brand.watches">
+      <ion-col size="12" *ngFor="let watch of brand.value">
         <app-watch-preview [watch]="watch"></app-watch-preview>
       </ion-col>
     </ion-row>
-
   </ion-grid>
 </ion-content>

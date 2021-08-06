@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
-import { StorageKey } from '../types/enums/storage-key.type';
+import { StorageKey } from '../../types/enums/storage-key.type';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class StorageService {
+export class KeyValueStorageService {
 
   private _localStorage: Storage = null;
 
-  constructor(storage: Storage) {
+  constructor(private storage: Storage, public toastController: ToastController) {
     this._init(storage);
   }
 
@@ -31,7 +32,9 @@ export class StorageService {
   }
 
   async setObj(key: string, object: Object): Promise<boolean> {
-    return await this.set(key, JSON.stringify(object));
+    const res = await this.set(key, JSON.stringify(object));
+    this.presentToast("Object saved");
+    return res;
   }
 
   async getObj(key: string): Promise<any> {
@@ -56,5 +59,13 @@ export class StorageService {
 
   setFirstLoad(isFirst: boolean = false): void {
     this.set(StorageKey.FirstLoad, isFirst);
+  }
+
+  private async presentToast(text: string): Promise<any> {
+    const toast = await this.toastController.create({
+      message: text,
+      duration: 2000
+    });
+    toast.present();
   }
 }

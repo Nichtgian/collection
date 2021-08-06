@@ -4,14 +4,14 @@ import { NavController } from '@ionic/angular';
 import { Watch } from 'src/app/data/models/watch/watch.model';
 
 @Component({
-  selector: 'app-watch-preview',
-  templateUrl: './watch-preview.component.html',
-  styleUrls: ['./watch-preview.component.scss'],
+  selector: 'app-slot-preview',
+  templateUrl: './slot-preview.component.html',
+  styleUrls: ['./slot-preview.component.scss'],
 })
+export class SlotPreviewComponent implements OnInit {
 
-export class WatchPreviewComponent implements OnInit {
-
-  @Input() watch: Watch;
+  @Input() watchId: string = null;
+  watch: Watch = null;
   
   showToggleLume: boolean = false;
   showPrimaryAsset: boolean = true;

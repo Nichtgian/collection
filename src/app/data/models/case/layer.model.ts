@@ -1,7 +1,9 @@
-export class Layer {
-    title: string;
+import { Watch } from "../watch/watch.model";
 
-    rowsCount: RowCountType;
-    slotsCount: SlotCountType;
-    watches: Watch[];
+export class Layer {
+    title: string = "Top"
+
+    /*rowsCount: RowCountType;
+    slotsCount: SlotCountType;*/
+    watchIds: string[];
 }
