@@ -1,3 +1,27 @@
-<p>
-  slot-preview works!
-</p>
+<ion-card [color]="showLumeAsset ? 'dark' : 'none'">
+  <ion-card-header class="ion-text-center">
+    <ion-card-subtitle>{{watch.model}}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content (click)="navigateDetail()">
+    <ion-img [hidden]="showLumeAsset" [src]="watch.primaryAsset" alt="primary watch display image"></ion-img>
+    <ion-img [hidden]="showPrimaryAsset" [src]="watch.lumeshotAsset" alt="secondary watch night lumeshot"></ion-img>
+  </ion-card-content>
+
+  <ion-footer>
+    <ion-buttons class="ion-justify-content-center">
+      <ion-button ([hidden])="showToggleLume" (click)="toggleAsset()">
+        <ion-icon name="moon-outline" [hidden]="showLumeAsset"></ion-icon>
+        <ion-icon name="sunny-outline" [hidden]="showPrimaryAsset"></ion-icon>
+      </ion-button>
+      <ion-button (click)="toggleMarked()">
+        <ion-icon name="heart-outline" [hidden]="watch.isMarked"></ion-icon>
+        <ion-icon name="heart" [hidden]="!watch.isMarked"></ion-icon>
+      </ion-button>
+      <ion-button (click)="navigateDetail()">
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-footer>
+
+</ion-card>

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
 import { Case } from 'src/app/data/models/case/case.model';
+import { Layer } from 'src/app/data/models/case/layer.model';
 import { CaseModelService } from 'src/app/data/services/model/case-model.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class CaseDetailPage implements OnInit {
   
   id: string = null;
   case: Case;
+  layer: Layer;
 
   constructor(private caseService: CaseModelService, private route: ActivatedRoute, public actionSheetController: ActionSheetController) {}
 
@@ -32,6 +34,7 @@ export class CaseDetailPage implements OnInit {
 
   async initialize(): Promise<any> {
     this.case = await this.caseService.get(this.id);
+    this.layer = this.case.layers[0];
   }
   
   async openActionSheet() {
@@ -62,5 +65,9 @@ export class CaseDetailPage implements OnInit {
 
   async save(): Promise<any> {
     this.caseService.save();
+  }
+
+  switchLayer(layerTitle: string): void {
+    this.layer = this.case.layers.find(x => x.title == layerTitle);
   }
 }

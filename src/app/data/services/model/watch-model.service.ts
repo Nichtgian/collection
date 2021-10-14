@@ -41,6 +41,13 @@ export class WatchModelService extends ModelService<Watch> {
         model: "Seiko Arabic Dial 5",
         reference: "SNK063J5",
         title: "Eastern arabic dial - daydate"
+      },
+      <Watch> {
+        brand: "Seiko",
+        subbrand: "5 Sports",
+        model: "Seiko Arabic Dial 5",
+        reference: "SNK063J5",
+        title: "Eastern arabic dial - daydate"
       }
     ]
 
